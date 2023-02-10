@@ -11,8 +11,8 @@ with open("README.md", "r") as readme_file, open("requirements.txt", "r") as req
     requirements_dev = [line.replace("\n", "")
                         for line in requirements_dev_file.readlines()]
     # filter the odd line containing the ceritifi dependency, and the development dependencies
-    requirements = [line.replace("\n", "")
-                    for line in requirements_file.readlines()]
+    requirements = filter_requirements([line.replace("\n", "")
+                                        for line in requirements_file.readlines()])
     print(requirements)
 
 

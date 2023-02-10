@@ -11,4 +11,4 @@ src/python_template.egg-info/dependency_links.txt
 src/python_template.egg-info/requires.txt
 src/python_template.egg-info/top_level.txt
 src/python_template/models/__init__.py
-tests/test_sql_session_api.py
+tests/test_add.py
