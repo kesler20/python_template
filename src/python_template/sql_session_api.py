@@ -5,6 +5,36 @@ from sqlalchemy.orm import sessionmaker
 class SQLSessionAPI:
     """The SQLSessionAPI allows to implement CRUD operations on the tables of an SQL database.
     This is dove via SQLAlchemy tables which are the ORMs in python.
+
+    initialise the SQLSessionAPI in two main ways:
+
+    Example
+    -------
+    using a flask application
+
+    ```python
+    # SERVER SIDE APPLICATION
+    app = Flask(__name__)
+    CORS(app)
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///python_template.sqlite3"
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
+    app.config["SECRET_KEY"] = "top secret!"
+    app.permanent_session_lifetime = timedelta(minutes=50)
+
+    # DATABASE API
+    db = SQLAlchemy(app)
+
+    session = SQLSessionAPI(app=app, db=db)
+    ```
+
+    or using a database engine
+    ```python
+    test_database_url = "sqlite:///tests/database.sqlite3"
+    engine = create_engine(test_database_url)
+    Base = declarative_base()
+
+    session = SQLSessionAPI(engine=engine, base=Base)
+    ```
     """
 
     def __init__(
