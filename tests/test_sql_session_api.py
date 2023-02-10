@@ -7,7 +7,6 @@ import unittest
 
 test_database_url = "sqlite:///tests/database.sqlite3"
 engine = create_engine(test_database_url)
-
 Base = declarative_base()
 
 
