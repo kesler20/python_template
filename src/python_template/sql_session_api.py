@@ -1,4 +1,5 @@
-from typing import Any
+from typing import Any, Optional
+from sqlalchemy.orm import sessionmaker
 
 
 class SQLSessionAPI:
@@ -6,11 +7,37 @@ class SQLSessionAPI:
     This is dove via SQLAlchemy tables which are the ORMs in python.
     """
 
-    def __init__(self, db: Any, app : Any) -> None:
-        with app.app_context():
-            db.create_all()
-            self.db = db
-            self.session = db.session
+    def __init__(self, engine: Optional[Any] = None, base: Optional[Any] = None, db: Optional[Any] = None, app : Optional[Any] = None) -> None:
+        if engine is not None and base is not None:
+            base.metadata.create_all(engine)
+            Session = sessionmaker(bind=engine)
+            self.session = Session()
+
+        else:
+            if db is not None and app is not None:
+                with app.app_context():
+                    db.create_all()
+                    self.session = db.session
+            else:
+                print("initialise the engine as follows:")
+                print("""
+                engine = create_engine("sqlite:///tests/database.sqlite3")
+                Base = declarative_base()
+
+
+                class User(Base):
+                    __tablename__ = "users"
+                    id = Column(Integer, primary_key=True)
+                    name = Column(String)
+
+                SQLSessionAPI(engine=engine, base=Base)
+                """)
+
+    def close_connection(self) -> None:
+        """close the session to allow other processes to access the database
+        """
+        self.session.close()
+
 
     def write_value(self, new_row: Any) -> None:
         """write_value this method will add a row to the given table. i.e.
@@ -38,7 +65,6 @@ class SQLSessionAPI:
         self.session.commit()
 
     def update_value(self, class_table: Any, key: str, value: str, **kwargs: Any):
-        print(class_table)
         self.session.query(class_table).filter_by(
             **kwargs).update({key: value})
         self.session.commit()
