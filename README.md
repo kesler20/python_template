@@ -8,3 +8,6 @@ are required for the python application to be installed as a python package. Thi
 
 
 run pre-commit install
+
+this can be viewed as we used --cov on the configuration file
+a 100% test coverage means that all your tests combined cover every single line of executable code
