@@ -28,7 +28,7 @@ with open("README.md", "r") as readme_file, open(
 if __name__ == "__main__":
     setup(
         name="python_template",
-        version="0.1.0",
+        version="0.0.1",
         description="A template for making python packages",
         long_description_content_type="text/markdown",
         long_description=long_description,

@@ -15,6 +15,7 @@ def home():
         request_data = json.loads(request.data.decode())
         return {"res": jsonify(request_data)}
     else:
+
         return jsonify([1, 2, 3, 4])
 
 
