@@ -13,7 +13,7 @@ def commit_formatter(commit: str):
         commit = commit.replace("-d ", "DOCUMENTATION: ")
         commit += "📄"
     else:
-        commit = "make it better"
+        pass
     return commit
 
 
