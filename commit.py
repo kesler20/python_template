@@ -7,10 +7,10 @@ def commit_formatter(commit: str):
         commit = commit.replace("t ", "TEST: ")
         commit += "🧪"
     elif commit.startswith("c "):
-        commit = commit.replace("c", "CODE: ")
+        commit = commit.replace("c ", "CODE: ")
         commit += "💻"
     elif commit.startswith("d "):
-        commit = commit.replace("d", "DOCUMENTATION: ")
+        commit = commit.replace("d ", "DOCUMENTATION: ")
         commit += "📄"
     else:
         commit = "make it better"

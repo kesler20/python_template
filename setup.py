@@ -3,7 +3,11 @@ from typing import List
 
 
 def filter_requirements(requirements: List[str]):
-    return list(filter(lambda line: not line.startswith("certifi") and line not in requirements_dev and not line.startswith("-e"), requirements))
+    return list(filter(
+        lambda line: not line.startswith(
+            "certifi") and line not in requirements_dev and not line.startswith("-e"),
+        requirements
+    ))
 
 
 with open("README.md", "r") as readme_file, open("requirements.txt", "r") as requirements_file, open("requirements_dev.txt", "r") as requirements_dev_file:
