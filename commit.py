@@ -3,14 +3,14 @@ import sys
 
 
 def commit_formatter(commit: str):
-    if commit.startswith("t"):
-        commit = commit.replace("t ", "TEST: ")
+    if commit.startswith("-t "):
+        commit = commit.replace("-t ", "TEST: ")
         commit += "🧪"
-    elif commit.startswith("c "):
-        commit = commit.replace("c ", "CODE: ")
+    elif commit.startswith("-c "):
+        commit = commit.replace("-c ", "CODE: ")
         commit += "💻"
-    elif commit.startswith("d "):
-        commit = commit.replace("d ", "DOCUMENTATION: ")
+    elif commit.startswith("-d "):
+        commit = commit.replace("-d ", "DOCUMENTATION: ")
         commit += "📄"
     else:
         commit = "make it better"
@@ -18,6 +18,8 @@ def commit_formatter(commit: str):
 
 
 if __name__ == "__main__":
+    # run black from here to avoid weird errors
+    os.system("black . --line-length=100")
     if len(sys.argv) > 1:
         os.system("git add .")
         print("staging all files ... 🐍")

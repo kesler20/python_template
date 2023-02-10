@@ -3,11 +3,17 @@ from sqlalchemy.orm import sessionmaker
 
 
 class SQLSessionAPI:
-    """The SQLSessionAPI allows to implement CRUD operations on the tables of an SQL database. 
+    """The SQLSessionAPI allows to implement CRUD operations on the tables of an SQL database.
     This is dove via SQLAlchemy tables which are the ORMs in python.
     """
 
-    def __init__(self, engine: Optional[Any] = None, base: Optional[Any] = None, db: Optional[Any] = None, app : Optional[Any] = None) -> None:
+    def __init__(
+        self,
+        engine: Optional[Any] = None,
+        base: Optional[Any] = None,
+        db: Optional[Any] = None,
+        app: Optional[Any] = None,
+    ) -> None:
         if engine is not None and base is not None:
             base.metadata.create_all(engine)
             Session = sessionmaker(bind=engine)
@@ -20,7 +26,8 @@ class SQLSessionAPI:
                     self.session = db.session
             else:
                 print("initialise the engine as follows:")
-                print("""
+                print(
+                    """
                 engine = create_engine("sqlite:///tests/database.sqlite3")
                 Base = declarative_base()
 
@@ -31,13 +38,12 @@ class SQLSessionAPI:
                     name = Column(String)
 
                 SQLSessionAPI(engine=engine, base=Base)
-                """)
+                """
+                )
 
     def close_connection(self) -> None:
-        """close the session to allow other processes to access the database
-        """
+        """close the session to allow other processes to access the database"""
         self.session.close()
-
 
     def write_value(self, new_row: Any) -> None:
         """write_value this method will add a row to the given table. i.e.
@@ -65,12 +71,11 @@ class SQLSessionAPI:
         self.session.commit()
 
     def update_value(self, class_table: Any, key: str, value: str, **kwargs: Any):
-        self.session.query(class_table).filter_by(
-            **kwargs).update({key: value})
+        self.session.query(class_table).filter_by(**kwargs).update({key: value})
         self.session.commit()
 
     def read_value(self, class_table: Any, **kwargs: Any) -> Any:
-        """read_value this will read a specific value (row) from the given table. 
+        """read_value this will read a specific value (row) from the given table.
 
         # Example
         ```python
@@ -118,7 +123,7 @@ class SQLSessionAPI:
         return self.session.query(class_table).all()
 
     def delete_value(self, class_table: Any, **kwargs: Any) -> None:
-        """delete_value this method can be used to delete a specific value on the table or all the values which meet a specific condition. 
+        """delete_value this method can be used to delete a specific value on the table or all the values which meet a specific condition.
         the row can be identified with a key value pair.
 
         ## Example
@@ -134,7 +139,7 @@ class SQLSessionAPI:
             this is the name of the class of the table i.e. User
         **kargs tuple
             this is the key value pair that we want to use for our query i.e.
-            name='Paul', this will mean that we wabnt to delete all the users 
+            name='Paul', this will mean that we wabnt to delete all the users
             named Paul
 
         Returns
@@ -142,8 +147,7 @@ class SQLSessionAPI:
         result: None
         """
         # Delete a row from the table
-        rows_to_delete = self.session.query(
-            class_table).filter_by(**kwargs).all()
+        rows_to_delete = self.session.query(class_table).filter_by(**kwargs).all()
         for row_to_delete in rows_to_delete:
             self.session.delete(row_to_delete)
         self.session.commit()
