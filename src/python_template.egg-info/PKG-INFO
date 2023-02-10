@@ -1,0 +1,18 @@
+Metadata-Version: 2.1
+Name: python-template
+Version: 0.1.0
+Summary: A template for making python packages
+Author: Kesler Isoko
+Author-email: uchekesla@gmail.com
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+Provides-Extra: dev
+
+# Python Tempalte
+
+the following files, inlcuding:
+- `pyproject.toml`
+- `setup.py`
+
+are required for the python application to be installed as a python package. This will allow to import the various modules within the package from any part of the programme and to run tests using `pytest` accordingly.

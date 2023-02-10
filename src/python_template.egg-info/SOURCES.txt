@@ -1,0 +1,14 @@
+README.md
+pyproject.toml
+setup.py
+src/python_template/__init__.py
+src/python_template/_base.py
+src/python_template/app.py
+src/python_template/sql_session_api.py
+src/python_template.egg-info/PKG-INFO
+src/python_template.egg-info/SOURCES.txt
+src/python_template.egg-info/dependency_links.txt
+src/python_template.egg-info/requires.txt
+src/python_template.egg-info/top_level.txt
+src/python_template/models/__init__.py
+tests/test_sql_session_api.py
